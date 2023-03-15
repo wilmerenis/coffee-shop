@@ -17,12 +17,13 @@ const common_1 = require("@nestjs/common");
 const coffee_service_1 = require("./coffee.service");
 const create_coffee_dto_1 = require("./dto/create-coffee.dto");
 const update_coffee_dto_1 = require("./dto/update-coffee.dto");
+const pagination_query_dto_1 = require("../common/dto/pagination-query.dto");
 let CoffeesController = class CoffeesController {
     constructor(coffeeService) {
         this.coffeeService = coffeeService;
     }
-    findAll() {
-        return this.coffeeService.findAll();
+    findAll(paginationQuery) {
+        return this.coffeeService.findAll(paginationQuery);
     }
     findOne(id) {
         const coffee = this.coffeeService.findOne(id);
@@ -45,8 +46,9 @@ let CoffeesController = class CoffeesController {
 };
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [pagination_query_dto_1.PaginationQueryDto]),
     __metadata("design:returntype", void 0)
 ], CoffeesController.prototype, "findAll", null);
 __decorate([
@@ -58,7 +60,6 @@ __decorate([
 ], CoffeesController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, common_1.HttpCode)(common_1.HttpStatus.GONE),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_coffee_dto_1.CreateCoffeeDto]),
